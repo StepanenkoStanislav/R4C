@@ -11,7 +11,7 @@ from openpyxl.workbook.workbook import Workbook
 from robots.services import DATETIME_FILE_FORMAT, ADDITIONAL_COLUMN_WIDTH
 
 
-class MakeRobotsExcelReportService:
+class MakeExcelReportService:
 
     def __init__(
             self, robots: Iterable[dict], headers: list[str]) -> None:
@@ -66,7 +66,7 @@ class MakeRobotsExcelReportService:
             DATETIME_FILE_FORMAT) + filename + extension
 
 
-class MakeExcelRobotsSummaryService(MakeRobotsExcelReportService):
+class MakeExcelRobotsSummaryService(MakeExcelReportService):
 
     def _set_styled_headers(self, worksheet: Worksheet) -> None:
         self._set_headers(worksheet)
