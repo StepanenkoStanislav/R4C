@@ -15,7 +15,13 @@ from robots.models import Robot
 
 
 @receiver(post_save, sender=Robot)
-def print_email(sender: Type[ModelBase], instance: Robot, **kwargs) -> None:
+def send_email_robot_arrival_to_customer(
+        sender: Type[ModelBase], instance: Robot, **kwargs) -> None:
+    """
+    После вызова у Robot метода save() проверяется наличие заказа
+    с нужным серийным номером. Если заказ существует, клиенту
+    будет отправлено письмо.
+    """
     if kwargs.get('created'):
         return
     order = Order.objects.filter(robot_serial=instance.serial).first()
