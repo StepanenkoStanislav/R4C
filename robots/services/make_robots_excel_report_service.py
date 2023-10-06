@@ -78,14 +78,14 @@ class MakeExcelRobotsSummaryService(MakeExcelReportService):
         workbook = openpyxl.Workbook()
         worksheet = workbook.active
         model = ''
-        first_sheet = True
+        first_record = True
         for robot in self._robots:
-            if first_sheet:
-                first_sheet = False
+            if first_record:
                 model = robot.get('model')
+                first_record = False
                 worksheet.title = model
                 self._set_styled_headers(worksheet)
-            if robot.get('model') != model:
+            elif robot.get('model') != model:
                 model = robot.get('model')
                 worksheet = workbook.create_sheet()
                 worksheet.title = model
