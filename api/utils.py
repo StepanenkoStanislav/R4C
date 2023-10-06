@@ -18,7 +18,7 @@ def json_to_dict(data: [str, bytes, bytearray]) -> dict:
 
 def get_model_object(model: Type[DjangoModel], data: dict) -> DjangoModel:
     try:
-        return model.objects.create(**data)
+        return model(**data)
     except TypeError as err:
         field = re.search(FIELD_NAME_PATTERN, *err.args).group('field')
         raise ValidationError({'error': f'name {field} is not correct.'})
