@@ -6,7 +6,7 @@ from typing import Type
 from django.core.exceptions import BadRequest, ValidationError
 
 from api import (
-    FIELD_NAME_PATTERN, LETTERS_AND_DIGITS, SERIAL_LENGTH, DjangoModel)
+    FIELD_NAME_PATTERN, LETTERS_AND_DIGITS, ROBOT_SERIAL_LENGTH, DjangoModel)
 
 
 def json_to_dict(data: [str, bytes, bytearray]) -> dict:
@@ -26,4 +26,5 @@ def get_model_object(model: Type[DjangoModel], data: dict) -> DjangoModel:
 
 def get_serial() -> str:
     return ''.join(
-        [random.choice(LETTERS_AND_DIGITS) for _ in range(SERIAL_LENGTH)])
+        [random.choice(LETTERS_AND_DIGITS) for _ in range(
+            ROBOT_SERIAL_LENGTH)])
